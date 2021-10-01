@@ -29,13 +29,10 @@ class UserFirebaseRepository(
     private fun onDataChangedOrAdded(snapshot: DataSnapshot) {
         try {
             val data = snapshot.getValue<UserDataDto>()
-            println(data)
             if (data != null) {
                 repoCallback.onAddedOrChanged(data)
             }
         } catch (e: Exception) {
-
-            println("exception ${e}")
             firebaseCrash.setErrorToFireBase(
                 e,
                 "onDataChangedOrAdded UserFirebaseRepository.kt  38: "
