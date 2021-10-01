@@ -2,6 +2,7 @@ package com.mking11.androidDemo.common.viewmodels
 
 import android.os.CountDownTimer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
 import com.mking11.androidDemo.common.models.ConnectionEnums
@@ -9,6 +10,8 @@ import com.mking11.androidDemo.common.repositories.ConnectionRepository
 import com.mking11.androidDemo.common.repositories.NetworkConnectionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

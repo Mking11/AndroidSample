@@ -13,5 +13,7 @@ class FirebaseRealDb @Inject constructor(
         return realDb.getReference(".info/connected")
     }
 
+    fun usersDocRef():DatabaseReference = realDb.getReference("users")
+
 
 }

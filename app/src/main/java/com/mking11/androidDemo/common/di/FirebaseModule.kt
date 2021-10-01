@@ -27,13 +27,15 @@ object FirebaseModule {
         if (realDb == null) {
             when (BuildConfig.BUILD_TYPE) {
                 "debug" -> {
-                    realDb = FirebaseDatabase.getInstance()
+                    realDb =
+                        FirebaseDatabase.getInstance("https://androiddemo-debb9-default-rtdb.europe-west1.firebasedatabase.app")
                     realDb.setPersistenceEnabled(true)
 //                    realDb?.useEmulator(BuildConfig.IP_ADDRESS, 9000)
                 }
 
                 else -> {
-                    realDb = FirebaseDatabase.getInstance()
+                    realDb =
+                        FirebaseDatabase.getInstance("https://androiddemo-debb9-default-rtdb.europe-west1.firebasedatabase.app")
                     realDb.setPersistenceEnabled(true)
 
                 }
