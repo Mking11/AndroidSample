@@ -1,6 +1,6 @@
 package com.mking11.androidDemo.common.entites.user.models
 
-import com.mking11.androidDemo.common.models.DboConvertor
+import com.mking11.androidDemo.common.utils.DboConvertor
 
 
 data class UserDataDto(

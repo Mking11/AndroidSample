@@ -1,4 +1,4 @@
-package com.mking11.androidDemo.common.models
+package com.mking11.androidDemo.common.utils
 
 
 interface DboConvertor<T> {

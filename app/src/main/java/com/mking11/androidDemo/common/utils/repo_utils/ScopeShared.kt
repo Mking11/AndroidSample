@@ -8,20 +8,19 @@ import kotlinx.coroutines.cancel
 
 
 open class ScopeShared(
-    private val fileName: String,
     private val className: String,
     private val firebaseCrash: FirebaseCrash,
     val scope: CoroutineScope = CoroutineScope(Dispatchers.IO),
 ) {
     open val handler = CoroutineExceptionHandler { _, e ->
-        firebaseCrash.setErrorToFireBase(e, "$fileName $className : ")
+        firebaseCrash.setErrorToFireBase(e, " $className : ")
     }
 
     open fun closeRepo() {
         try {
             scope.cancel()
         } catch (e: Exception) {
-            firebaseCrash.setErrorToFireBase(e, "${fileName}.kt close Repository  18: ")
+            firebaseCrash.setErrorToFireBase(e, "${className}.kt close Repository  18: ")
         }
     }
 

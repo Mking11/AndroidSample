@@ -9,13 +9,14 @@ import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
 import com.mking11.androidDemo.common.utils.dao_utils.DaoRepo
 
 class UserDaoRepository(dao: UserDao, private val firebaseCrash: FirebaseCrash) :
-    DaoRepo<UserDataDbo, String, UserDao>(firebaseCrash, "UserDaoRepository", dao),
+    DaoRepo<UserDataDbo, String, UserDao>(dao, "UserDaoRepository", firebaseCrash),
     IUserDaoRepository {
-    override fun insertOrUpdateUser(userDataDbo: UserDataDto) {
+
+    override suspend fun insertOrUpdateUser(userDataDbo: UserDataDto) {
         super.insertOrUpdate(userDataDbo.toDbo())
     }
 
-    override fun deleteUser(userDataDbo: UserDataDto) {
+    override suspend fun deleteUser(userDataDbo: UserDataDto) {
         super.deleteItem(userDataDbo.toDbo())
     }
 
