@@ -1,4 +1,4 @@
-package com.mad.jemla.navdrawer
+package com.mking11.androidDemo
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData

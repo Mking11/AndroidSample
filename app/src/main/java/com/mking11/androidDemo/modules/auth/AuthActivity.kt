@@ -6,15 +6,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
 import androidx.compose.material.*
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mking11.androidDemo.MainActivity
 import com.mking11.androidDemo.common.firebaseutils.FirebaseAuthRepo
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
+import com.mking11.androidDemo.modules.auth.navigation.AuthNavigation
 import com.mking11.androidDemo.ui.theme.AndriodTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
+@ExperimentalComposeUiApi
 @AndroidEntryPoint
 class AuthActivity : ComponentActivity() {
 
@@ -23,6 +25,7 @@ class AuthActivity : ComponentActivity() {
 
     @Inject
     lateinit var firebaseAuthRepo: FirebaseAuthRepo
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +49,9 @@ class AuthActivity : ComponentActivity() {
                     }
                 }) {
 
+                    AuthNavigation(scaffoldState) {
+
+                    }
                 }
             }
         }

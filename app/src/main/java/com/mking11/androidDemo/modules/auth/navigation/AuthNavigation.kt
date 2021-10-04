@@ -6,6 +6,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.mking11.androidDemo.modules.auth.views.login.LoginComponent
 
 
 @ExperimentalComposeUiApi
@@ -16,6 +17,9 @@ fun AuthNavigation(scaffoldState: ScaffoldState, handleNavigateOut: () -> Unit) 
     NavHost(navController = navController, startDestination = Screens.LOGIN_SCREEN) {
         composable(Screens.LOGIN_SCREEN) {
 
+            LoginComponent(navController, scaffoldState = scaffoldState) {
+
+            }
         }
     }
 }
