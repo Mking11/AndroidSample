@@ -17,9 +17,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.users?.observe(this,{
-            println("users $it")
-        })
+            viewModel.apply {  }
         setContent {
             AndriodTheme {
                 // A surface container using the 'background' color from the theme

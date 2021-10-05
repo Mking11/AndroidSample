@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Andriod">
         <activity
-            android:name=".modules.auth.AuthActivity"
+            android:name=".moduels.auth.AuthActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Andriod.NoActionBar">

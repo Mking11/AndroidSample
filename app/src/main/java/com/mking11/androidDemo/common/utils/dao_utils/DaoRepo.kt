@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
 import com.mking11.androidDemo.common.utils.repo_utils.DaoCommon
 import com.mking11.androidDemo.common.utils.repo_utils.ScopeShared
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 abstract class DaoRepo<OutPutType : Any, PrimaryKeyType, daoType : DaoCommon<OutPutType, PrimaryKeyType>>(
@@ -32,10 +33,10 @@ abstract class DaoRepo<OutPutType : Any, PrimaryKeyType, daoType : DaoCommon<Out
         dao.clearSelected(ids)
     }
 
-    fun getItems(): LiveData<List<OutPutType>>? = dao.getItems()
+    fun getItems(): Flow<List<@JvmSuppressWildcards OutPutType>>? = dao.getItems()
 
 
-    fun getItems(items: List<PrimaryKeyType>): LiveData<List<OutPutType>>? =
+    fun getItems(items: List<PrimaryKeyType>): Flow<List<OutPutType>>? =
         dao.getSelectedItems(items)
 
 
