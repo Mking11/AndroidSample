@@ -1,12 +1,13 @@
 package com.mking11.androidDemo.moduels.auth.features.login.presentation
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mking11.androidDemo.common.firebaseutils.FirebaseAuthRepo
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
-import com.mking11.androidDemo.common.models.AppResult
-import com.mking11.androidDemo.moduels.auth.features.login.util.loginInputValidation
+import com.mking11.androidDemo.moduels.auth.features.login.LoginEvent
+import com.mking11.androidDemo.moduels.auth.features.login.LoginState
+import com.mking11.androidDemo.moduels.auth.features.login.LoginUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -16,67 +17,38 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
-    private val authRepo: FirebaseAuthRepo,
-    private val firebaseCrash: FirebaseCrash
+@ExperimentalCoroutinesApi
+class LoginViewModel
+@Inject constructor(
+    private val firebaseCrash: FirebaseCrash,
+    private val loginUseCases: LoginUseCases
 ) : ViewModel() {
-
 
     private val handler = CoroutineExceptionHandler { _, e ->
         firebaseCrash.setErrorToFireBase(e, " LoginViewModel.kt  19: ")
     }
 
-    val userCredentialError = mutableStateOf<String?>(null)
-    val passError = mutableStateOf<String?>(null)
-    val error = mutableStateOf<String?>(null)
-    val progress = mutableStateOf(false)
-
-
-    fun clearErrors() {
-        userCredentialError.value = null
-        passError.value = null
-        error.value = null
-    }
+    private val _loginState = mutableStateOf(LoginState())
+    val loginState: State<LoginState> = _loginState
 
 
     @ExperimentalCoroutinesApi
-    fun handleLogin(userCredential: String, userPassword: String, onSuccess: () -> Unit) =
-        viewModelScope.launch {
-            clearErrors()
-            val isValid = loginInputValidation(userCredential, userPassword, onPassword = {
-                passError.value = it
-            }, onEmailError = {
-                userCredentialError.value = it
-            })
-
-            if (isValid) {
-                authRepo.userLogin(userCredential, userPassword).catch { e ->
-                    firebaseCrash.setErrorToFireBase(e, "handleLogin LoginViewModel.kt  49: ")
+    fun loginEvents(loginEvent: LoginEvent) = viewModelScope.launch {
+        when (loginEvent) {
+            is LoginEvent.LoginEmail -> {
+                loginUseCases.loginByEmail.invoke(
+                    loginEvent.userCredential,
+                    loginEvent.password,
+                    loginEvent.context,
+                ).catch { e ->
+                    firebaseCrash.setErrorToFireBase(e, "loginEvents LoginViewModel.kt  46: ")
                 }.collect {
-                    when (it) {
-                        is AppResult.Error.NonRecoverableError -> {
-                            progress.value = false
-                            error.value = it.exception?.message ?: "Error"
-                        }
-                        is AppResult.Error.RecoverableError -> {
-                            progress.value = false
-                            error.value = it.exception?.message ?: "Error"
-                        }
-                        is AppResult.Failure -> {
-                            progress.value = false
-                            error.value = it.messages
-                        }
-                        AppResult.InProgress -> {
-                            progress.value = true
-                        }
-                        is AppResult.Success -> {
-                            progress.value = false
-                            onSuccess()
-                        }
-                    }
+                    println("State changed ${it}")
+                    _loginState.value = it
                 }
             }
-
-
         }
+    }
+
+
 }

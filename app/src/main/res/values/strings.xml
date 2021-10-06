@@ -3,4 +3,13 @@
     <string name="title_activity_auth">auth</string>
     <string name="required">Required</string>
     <string name="invalid_email">Invalid Email address</string>
+    <string name="connection_issues">Connection issues try again</string>
+    <string name="invalid_credentials">Invalid credentials</string>
+    <string name="invalid_user">Invalid user, please use a valid one</string>
+    <string name="too_many_requests">Too many requests, please try again later</string>
+    <string name="invalid_email_error">Invalid email, Please use a valid email address</string>
+    <string name="update_application">Please update your application</string>
+    <string name="unknown_error">Unknown error, Please try again</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sigining_in">Signing in...</string>
 </resources>

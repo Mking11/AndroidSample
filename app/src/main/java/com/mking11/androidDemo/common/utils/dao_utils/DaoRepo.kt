@@ -1,6 +1,5 @@
 package com.mking11.androidDemo.common.utils.dao_utils
 
-import androidx.lifecycle.LiveData
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
 import com.mking11.androidDemo.common.utils.repo_utils.DaoCommon
 import com.mking11.androidDemo.common.utils.repo_utils.ScopeShared

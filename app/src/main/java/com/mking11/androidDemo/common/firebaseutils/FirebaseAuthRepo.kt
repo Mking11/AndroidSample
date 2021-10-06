@@ -2,6 +2,7 @@ package com.mking11.androidDemo.common.firebaseutils
 
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.crashlytics.internal.common.CommonUtils
 import com.mking11.androidDemo.common.models.AppResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 class FirebaseAuthRepo @Inject constructor(private val auth: FirebaseAuth) {
 
     fun getUserId(): String? {
@@ -37,7 +39,7 @@ class FirebaseAuthRepo @Inject constructor(private val auth: FirebaseAuth) {
     }
 
 
-    @ExperimentalCoroutinesApi
+
     fun userLogin(user: String, password: String): Flow<AppResult<String>> = callbackFlow {
         this.trySend(AppResult.InProgress).isSuccess
         auth.signInWithEmailAndPassword(user, password)
@@ -45,13 +47,20 @@ class FirebaseAuthRepo @Inject constructor(private val auth: FirebaseAuth) {
                 if (authResponse.user?.uid != null) {
                     this.trySend(AppResult.Success(authResponse.user?.uid!!))
                 } else {
-                    this.trySend(AppResult.Failure(null, "User id not found"))
+                    this.trySend(
+                        AppResult.Error.RecoverableError(
+                            exception = FirebaseAuthInvalidUserException(
+                                "00",
+                                "Unknown User"
+                            )
+                        )
+                    )
                 }
             }.addOnFailureListener { e ->
                 this.trySend(
                     AppResult.Error.RecoverableError(
                         Exception(
-                            e.localizedMessage.toString() ?: "Unknown error"
+                            e
                         )
                     )
                 ).isFailure

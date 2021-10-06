@@ -2,14 +2,11 @@ package com.mking11.androidDemo.features.user.domain.use_cases
 
 import com.mking11.androidDemo.features.user.UserRepository
 import com.mking11.androidDemo.features.user.domain.model.UserDataDto
-import kotlinx.coroutines.flow.Flow
 
-
-class GetUsersRemote(
+class InsertUsersToDb(
     private val userRepository: UserRepository
 ) {
-
-//    operator fun invoke(): Flow<HashMap<String, UserDataDto>> {
-//
-//    }
+    suspend operator fun invoke(users: List<UserDataDto>) {
+        users.forEach { user -> userRepository.insertOrUpdateUserDb(user) }
+    }
 }

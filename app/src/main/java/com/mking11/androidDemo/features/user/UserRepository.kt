@@ -8,6 +8,8 @@ interface UserRepository {
     suspend fun insertOrUpdateUserDb(userDataDbo: UserDataDto)
     suspend fun deleteUserDb(userDataDbo: UserDataDto)
     fun getUsersDb(): Flow<List<UserDataDbo>>?
-    fun getUserRemote(): Flow<HashMap<String, UserDataDto>>
+    fun fetchUserRemote(): Flow<HashMap<String, UserDataDto>>
+    fun observeRemote()
+    fun closeRemote()
     fun closeRepository()
 }

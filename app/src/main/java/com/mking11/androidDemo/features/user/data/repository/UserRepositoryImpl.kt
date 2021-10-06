@@ -14,7 +14,7 @@ class UserRepositoryImpl(
     dao: UserDao,
     firebaseCrash: FirebaseCrash,
     private val firebaseDataSource: FirebaseValueDataSource<UserDataDto>
-) : DaoRepo<UserDataDbo, String, UserDao>(dao, "UserDaoRepository", firebaseCrash),
+) : DaoRepo<UserDataDbo, String, UserDao>(dao, "UserRepositoryImpl.kt", firebaseCrash),
     UserRepository {
 
     override suspend fun insertOrUpdateUserDb(userDataDbo: UserDataDto) {
@@ -26,12 +26,19 @@ class UserRepositoryImpl(
     }
 
     override fun getUsersDb(): Flow<List<@JvmSuppressWildcards UserDataDbo>>? = super.getItems()
-    override fun getUserRemote(): Flow<HashMap<String, UserDataDto>> =
+    override fun fetchUserRemote(): Flow<HashMap<String, UserDataDto>> =
         firebaseDataSource.repoHashedLive.asFlow()
+
+    override fun observeRemote() {
+        firebaseDataSource.observeValue()
+    }
+
+    override fun closeRemote() {
+        firebaseDataSource.closeRepository()
+    }
 
     override fun closeRepository() {
         firebaseDataSource.closeRepository()
-        closeRepo()
     }
 
 

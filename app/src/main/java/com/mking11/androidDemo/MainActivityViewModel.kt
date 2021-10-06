@@ -3,9 +3,7 @@ package com.mking11.androidDemo
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
-import com.mking11.androidDemo.common.utils.repo_utils.RepoCallback
-import com.mking11.androidDemo.features.user.UserRepository
-import com.mking11.androidDemo.features.user.domain.model.UserDataDto
+import com.mking11.androidDemo.features.user.domain.model.UserUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.collect
@@ -14,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val userRepository: UserRepository,
+    private val userUseCases: UserUseCases,
     private val firebaseCrash: FirebaseCrash
 ) : ViewModel() {
 
@@ -23,36 +21,17 @@ class MainActivityViewModel @Inject constructor(
     }
 
 
-    private val userDataCallbacks = object : RepoCallback<UserDataDto> {
-        override fun onAddedOrChanged(item: UserDataDto) {
-            viewModelScope.launch(handler) {
-                userRepository.insertOrUpdateUserDb(item)
-            }
-        }
-
-        override fun onDeleted(item: UserDataDto) {
-            viewModelScope.launch(handler) {
-                userRepository.deleteUserDb(item)
-            }
-        }
-
-    }
-
     init {
-        viewModelScope.launch {
-            userRepository.getUsersDb()?.collect {
-
-                println("users ${it}")
+        userUseCases.observeRemote.invoke()
+        viewModelScope.launch(handler) {
+            userUseCases.fetchRemote.invoke().collect {
+                userUseCases.insertUsersToDb.invoke(it)
             }
-
         }
-
-
-        userRepository.observeUser(userDataCallbacks)
     }
 
     override fun onCleared() {
-        userRepository.closeRepository()
+        userUseCases.closeRepository.invoke()
         super.onCleared()
     }
 }
