@@ -70,19 +70,19 @@ fun checkLoginException(e: Exception, context: Context): Pair<LoginErrorTypes, S
     }
 }
 
-fun handleException(e: Exception, context: Context): LoginState {
+fun LoginState.handleException(e: Exception, context: Context): LoginState {
     val exception = checkLoginException(e, context)
     return when (exception.first) {
-        LoginErrorTypes.GENERAL -> LoginState(isOnProgress = false, generalError = exception.second)
-        LoginErrorTypes.CREDENTIAL -> LoginState(
+        LoginErrorTypes.GENERAL -> copy(isOnProgress = false, generalError = exception.second)
+        LoginErrorTypes.CREDENTIAL -> copy(
             isOnProgress = false,
             userError = exception.second,
             passwordError = exception.second
         )
-        LoginErrorTypes.USER_CREDENTIAL -> LoginState(
+        LoginErrorTypes.USER_CREDENTIAL -> copy(
             isOnProgress = false,
             userError = exception.second
         )
-        LoginErrorTypes.PASSWORD -> LoginState()
+        LoginErrorTypes.PASSWORD -> copy()
     }
 }

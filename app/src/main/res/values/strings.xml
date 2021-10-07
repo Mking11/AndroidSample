@@ -12,4 +12,6 @@
     <string name="unknown_error">Unknown error, Please try again</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sigining_in">Signing in...</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>

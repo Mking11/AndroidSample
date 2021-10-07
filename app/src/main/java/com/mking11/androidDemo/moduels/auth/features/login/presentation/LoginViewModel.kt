@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
 import com.mking11.androidDemo.moduels.auth.features.login.LoginEvent
 import com.mking11.androidDemo.moduels.auth.features.login.LoginState
@@ -21,7 +22,8 @@ import javax.inject.Inject
 class LoginViewModel
 @Inject constructor(
     private val firebaseCrash: FirebaseCrash,
-    private val loginUseCases: LoginUseCases
+    private val loginUseCases: LoginUseCases,
+    val startIntent: GoogleSignInClient
 ) : ViewModel() {
 
     private val handler = CoroutineExceptionHandler { _, e ->
@@ -33,19 +35,30 @@ class LoginViewModel
 
 
     @ExperimentalCoroutinesApi
-    fun loginEvents(loginEvent: LoginEvent) = viewModelScope.launch {
+    fun loginEvents(loginEvent: LoginEvent) = viewModelScope.launch(handler) {
         when (loginEvent) {
             is LoginEvent.LoginEmail -> {
                 loginUseCases.loginByEmail.invoke(
                     loginEvent.userCredential,
                     loginEvent.password,
-                    loginEvent.context,
+                    loginEvent.context
                 ).catch { e ->
-                    firebaseCrash.setErrorToFireBase(e, "loginEvents LoginViewModel.kt  46: ")
+                    firebaseCrash.setErrorToFireBase(e, "loginEvents LoginViewModel.kt  45: ")
                 }.collect {
-                    println("State changed ${it}")
                     _loginState.value = it
                 }
+
+            }
+            is LoginEvent.LoginGoogle -> {
+                loginUseCases.loginByGoogle.invoke(
+                    result = loginEvent.result,
+                    errorMessage = loginEvent.errorMessage
+                ).catch { e ->
+                    firebaseCrash.setErrorToFireBase(e, "loginEvents LoginViewModel.kt  59: ")
+                }.collect {
+                    _loginState.value = it
+                }
+
             }
         }
     }

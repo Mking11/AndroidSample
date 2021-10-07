@@ -9,30 +9,37 @@ import androidx.compose.material.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.google.firebase.auth.FirebaseAuth
 import com.mking11.androidDemo.MainActivity
-import com.mking11.androidDemo.common.firebaseutils.FirebaseAuthRepo
+import com.mking11.androidDemo.common.firebaseutils.FirebaseAuthUtils
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
 import com.mking11.androidDemo.moduels.auth.navigation.AuthNavigation
 import com.mking11.androidDemo.ui.theme.AndriodTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 @ExperimentalComposeUiApi
 @AndroidEntryPoint
 class AuthActivity : ComponentActivity() {
+
 
     @Inject
     lateinit var firebaseCrash: FirebaseCrash
 
     @Inject
-    lateinit var firebaseAuthRepo: FirebaseAuthRepo
+    lateinit var auth: FirebaseAuth
+
+    @Inject
+    lateinit var firebaseAuthUtils: FirebaseAuthUtils
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
-        if (firebaseAuthRepo.isSingedIn()) {
+        if (firebaseAuthUtils.isSingedIn()) {
             handleNavigateOut()
         }
         setContent {
@@ -48,16 +55,14 @@ class AuthActivity : ComponentActivity() {
                         )
                     }
                 }) {
-
                     AuthNavigation(scaffoldState) {
                         handleNavigateOut()
                     }
                 }
             }
         }
-
-
     }
+
 
     private fun handleNavigateOut() {
         try {

@@ -3,7 +3,7 @@ package com.mking11.androidDemo.common.firebaseutils
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import javax.inject.Inject
 
-class FirebaseCrash @Inject constructor(private val firebaseAuthRepo: FirebaseAuthRepo) {
+class FirebaseCrash @Inject constructor(private val firebaseAuthUtils: FirebaseAuthUtils) {
     var firebaseCrashlytics: FirebaseCrashlytics? = null
 
     fun getInstance(): FirebaseCrashlytics {
@@ -16,7 +16,7 @@ class FirebaseCrash @Inject constructor(private val firebaseAuthRepo: FirebaseAu
         source: String
     ) {
         val instance = getInstance()
-        firebaseAuthRepo.getUserId()?.let { instance.setUserId(it) }
+        firebaseAuthUtils.getUserId()?.let { instance.setUserId(it) }
         if (e != null) {
             instance.setCustomKey("message", e.message.toString())
             instance.setCustomKey("stackTrace", e.stackTraceToString())
@@ -31,7 +31,7 @@ class FirebaseCrash @Inject constructor(private val firebaseAuthRepo: FirebaseAu
         source: String
     ) {
         val instance = getInstance()
-        firebaseAuthRepo.getUserId()?.let { instance.setUserId(it) }
+        firebaseAuthUtils.getUserId()?.let { instance.setUserId(it) }
 
         if (e != null) {
             instance.setCustomKey("message", e.message.toString())

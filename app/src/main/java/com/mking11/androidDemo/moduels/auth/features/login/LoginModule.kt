@@ -1,6 +1,7 @@
 package com.mking11.androidDemo.moduels.auth.features.login
 
-import com.mking11.androidDemo.common.firebaseutils.FirebaseAuthRepo
+import com.google.firebase.auth.FirebaseAuth
+import com.mking11.androidDemo.common.firebaseutils.FirebaseAuthUtils
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
 import dagger.Module
 import dagger.Provides
@@ -19,8 +20,10 @@ object LoginModule {
     @ExperimentalCoroutinesApi
     fun provideLoginUseCase(
         firebaseCrash: FirebaseCrash,
-        firebaseAuthRepo: FirebaseAuthRepo
+        firebaseAuthUtils: FirebaseAuthUtils,
+        auth: FirebaseAuth
     ): LoginUseCases = LoginUseCases(
-        loginByEmail = LoginByEmail(authRepo = firebaseAuthRepo, firebaseCrash)
+        loginByEmail = LoginByEmail(firebaseAuthUtils, firebaseCrash),
+        loginByGoogle = LoginByGoogle(auth = auth)
     )
 }
