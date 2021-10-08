@@ -10,7 +10,8 @@ import com.google.firebase.auth.FirebaseAuthEmailException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.mking11.androidDemo.R
-import com.mking11.androidDemo.moduels.auth.features.login.LoginState
+import com.mking11.androidDemo.moduels.auth.features.login.domain.models.LoginState
+import com.mking11.androidDemo.moduels.auth.features.login.domain.utils.LoginErrorTypes
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -137,7 +138,7 @@ class UtilsKtTest {
     @Test
     fun invalidUserTypeShouldReturnUserError() {
 
-        val result = handleException(
+        val result = LoginState().handleException(
             FirebaseAuthInvalidUserException(
                 "00", "Invalid user type"
             ), context
@@ -161,7 +162,7 @@ class UtilsKtTest {
 
     @Test
     fun generalExceptionShouldThroughGeneralError() {
-        val result = handleException(
+        val result = LoginState().handleException(
             Exception("An internal error has occurred. [ 7: ]"), context
         )
         Truth.assertThat(result.generalError)
@@ -172,7 +173,7 @@ class UtilsKtTest {
 
     @Test
     fun credentialExceptionTestShouldReturnErrorOnBothUserAndPassword() {
-        val result = handleException(
+        val result = LoginState().handleException(
             FirebaseAuthInvalidCredentialsException("00", "invalid user credentials"), context
         )
         Truth.assertThat(result.passwordError)
@@ -196,7 +197,7 @@ class UtilsKtTest {
 
     @Test
     fun tooManyResponseShouldShowGeneralError() {
-        val result = handleException(
+        val result = LoginState().handleException(
             FirebaseTooManyRequestsException("00"), context
         )
 
@@ -220,7 +221,7 @@ class UtilsKtTest {
 
     @Test
     fun emailErrorResponseShouldShowGeneralError() {
-        val result = handleException(
+        val result = LoginState().handleException(
             FirebaseAuthEmailException("00", "AuthError"), context
         )
 
@@ -244,7 +245,7 @@ class UtilsKtTest {
 
     @Test
     fun updateResponseShouldShowGeneralError() {
-        val result = handleException(
+        val result = LoginState().handleException(
             FirebaseAuthActionCodeException("00", "Exception"), context
         )
 
@@ -267,7 +268,7 @@ class UtilsKtTest {
 
     @Test
     fun unknownErrorShouldShowGeneralError() {
-        val result = handleException(
+        val result = LoginState().handleException(
             Exception("00"), context
         )
 

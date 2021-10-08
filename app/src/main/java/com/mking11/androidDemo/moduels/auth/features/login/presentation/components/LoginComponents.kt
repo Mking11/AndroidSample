@@ -24,7 +24,7 @@ import coil.compose.rememberImagePainter
 import com.mking11.androidDemo.R
 import com.mking11.androidDemo.common.presentation.components.OutlinedTextFieldWithError
 import com.mking11.androidDemo.common.presentation.components.PasswordOutlinedTextFieldWithError
-import com.mking11.androidDemo.moduels.auth.features.login.LoginEvent
+import com.mking11.androidDemo.moduels.auth.features.login.domain.utils.LoginEvent
 import com.mking11.androidDemo.moduels.auth.features.login.presentation.LoginViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 

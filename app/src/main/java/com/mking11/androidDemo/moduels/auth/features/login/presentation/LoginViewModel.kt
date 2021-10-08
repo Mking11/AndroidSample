@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
-import com.mking11.androidDemo.moduels.auth.features.login.LoginEvent
-import com.mking11.androidDemo.moduels.auth.features.login.LoginState
-import com.mking11.androidDemo.moduels.auth.features.login.LoginUseCases
+import com.mking11.androidDemo.moduels.auth.features.login.domain.utils.LoginEvent
+import com.mking11.androidDemo.moduels.auth.features.login.domain.models.LoginState
+import com.mking11.androidDemo.moduels.auth.features.login.domain.models.LoginUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.ExperimentalCoroutinesApi

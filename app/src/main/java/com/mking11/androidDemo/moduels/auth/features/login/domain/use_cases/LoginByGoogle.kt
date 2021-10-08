@@ -1,4 +1,4 @@
-package com.mking11.androidDemo.moduels.auth.features.login
+package com.mking11.androidDemo.moduels.auth.features.login.domain.use_cases
 
 
 import android.app.Activity.RESULT_OK
@@ -7,6 +7,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.mking11.androidDemo.moduels.auth.features.login.domain.models.LoginState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow

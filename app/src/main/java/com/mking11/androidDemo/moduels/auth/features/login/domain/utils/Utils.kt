@@ -8,7 +8,8 @@ import com.google.firebase.auth.FirebaseAuthEmailException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.mking11.androidDemo.R
-import com.mking11.androidDemo.moduels.auth.features.login.LoginState
+import com.mking11.androidDemo.moduels.auth.features.login.domain.models.LoginState
+import com.mking11.androidDemo.moduels.auth.features.login.domain.utils.LoginErrorTypes
 
 fun isValidEmail(email: String): Boolean {
     return try {

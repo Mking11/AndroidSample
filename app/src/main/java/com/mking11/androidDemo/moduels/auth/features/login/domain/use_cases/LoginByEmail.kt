@@ -1,9 +1,10 @@
-package com.mking11.androidDemo.moduels.auth.features.login
+package com.mking11.androidDemo.moduels.auth.features.login.domain.use_cases
 
 import android.content.Context
 import com.mking11.androidDemo.common.firebaseutils.FirebaseAuthUtils
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
 import com.mking11.androidDemo.common.models.AppResult
+import com.mking11.androidDemo.moduels.auth.features.login.domain.models.LoginState
 import com.mking11.androidDemo.moduels.auth.features.login.util.handleException
 import com.mking11.androidDemo.moduels.auth.features.login.util.loginInputValidation
 import kotlinx.coroutines.ExperimentalCoroutinesApi

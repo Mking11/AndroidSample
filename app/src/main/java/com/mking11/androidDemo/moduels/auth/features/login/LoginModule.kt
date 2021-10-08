@@ -3,6 +3,9 @@ package com.mking11.androidDemo.moduels.auth.features.login
 import com.google.firebase.auth.FirebaseAuth
 import com.mking11.androidDemo.common.firebaseutils.FirebaseAuthUtils
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
+import com.mking11.androidDemo.moduels.auth.features.login.domain.models.LoginUseCases
+import com.mking11.androidDemo.moduels.auth.features.login.domain.use_cases.LoginByEmail
+import com.mking11.androidDemo.moduels.auth.features.login.domain.use_cases.LoginByGoogle
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

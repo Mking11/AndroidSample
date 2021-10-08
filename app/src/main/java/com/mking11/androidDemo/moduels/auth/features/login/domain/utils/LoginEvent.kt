@@ -1,4 +1,4 @@
-package com.mking11.androidDemo.moduels.auth.features.login
+package com.mking11.androidDemo.moduels.auth.features.login.domain.utils
 
 import android.content.Context
 import androidx.activity.result.ActivityResult
