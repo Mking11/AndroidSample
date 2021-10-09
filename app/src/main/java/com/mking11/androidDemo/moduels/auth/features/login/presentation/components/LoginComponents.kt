@@ -26,6 +26,7 @@ import com.mking11.androidDemo.common.presentation.components.OutlinedTextFieldW
 import com.mking11.androidDemo.common.presentation.components.PasswordOutlinedTextFieldWithError
 import com.mking11.androidDemo.moduels.auth.features.login.domain.utils.LoginEvent
 import com.mking11.androidDemo.moduels.auth.features.login.presentation.LoginViewModel
+import com.mking11.androidDemo.moduels.auth.navigation.Screens
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -120,7 +121,7 @@ fun UserInputComposable(
             fieldLabel = stringResource(R.string.email),
             type = KeyboardType.Email,
             modifier = Modifier
-                .padding(top = 10.dp, start = 20.dp, end = 20.dp)
+                .padding(top = 10.dp, start = 30.dp, end = 30.dp)
                 .fillMaxWidth()
         )
 
@@ -134,7 +135,7 @@ fun UserInputComposable(
             onError = passError != null,
             errorValue = passError ?: "Error",
             modifier = Modifier
-                .padding(top = 10.dp, start = 20.dp, end = 20.dp)
+                .padding(top = 10.dp, start = 30.dp, end = 30.dp)
                 .fillMaxWidth()
         )
 
@@ -142,7 +143,7 @@ fun UserInputComposable(
         if (progress && !googleSignIn) {
             LinearProgressIndicator(
                 modifier = Modifier
-                    .padding(top = 40.dp, start = 20.dp, end = 20.dp)
+                    .padding(top = 40.dp, start = 30.dp, end = 30.dp)
                     .fillMaxWidth()
             )
         }
@@ -154,13 +155,21 @@ fun UserInputComposable(
                 keyboardController?.hide()
             },
             modifier = Modifier
-                .padding(top = 40.dp, start = 20.dp, end = 20.dp)
+                .padding(top = 40.dp, start = 30.dp, end = 30.dp)
                 .fillMaxWidth(), enabled = !progress
         ) {
             Text("Login")
         }
 
 
+
+        TextButton(
+            {
+                navController.navigate(Screens.SIGNUP_SCREEN)
+            }, modifier = Modifier.padding(top = 20.dp)
+        ) {
+            Text(stringResource(R.string.dont_have_an_account))
+        }
         SignInButton(
             modifier = Modifier.fillMaxWidth(0.8f).padding(top = 20.dp, start = 20.dp, end = 20.dp),
             text = stringResource(R.string.sign_in_with_google),

@@ -12,12 +12,10 @@ public class PhoneValidation {
             Phonenumber.PhoneNumber numberProto = phoneUtil.parse(phoneNumber, countryCode);
             Boolean result = phoneUtil.isValidNumber(numberProto);
 
-//            System.out.println("result phone" + result);
             return phoneUtil.isValidNumber(numberProto);
         } catch (NumberParseException e) {
-//            System.err.println("Number Parse Exception  was thrown" + e.toString());
+           return false;
         }
-        return false;
 
     }
 }

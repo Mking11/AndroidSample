@@ -5,8 +5,8 @@ import com.mking11.androidDemo.common.firebaseutils.FirebaseAuthUtils
 import com.mking11.androidDemo.common.firebaseutils.FirebaseCrash
 import com.mking11.androidDemo.common.models.AppResult
 import com.mking11.androidDemo.moduels.auth.features.login.domain.models.LoginState
-import com.mking11.androidDemo.moduels.auth.features.login.util.handleException
-import com.mking11.androidDemo.moduels.auth.features.login.util.loginInputValidation
+import com.mking11.androidDemo.moduels.auth.features.login.domain.utils.handleException
+import com.mking11.androidDemo.moduels.auth.features.login.domain.utils.loginInputValidation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow

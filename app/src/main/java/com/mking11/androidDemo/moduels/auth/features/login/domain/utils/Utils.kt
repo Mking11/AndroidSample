@@ -1,23 +1,14 @@
-package com.mking11.androidDemo.moduels.auth.features.login.util
+package com.mking11.androidDemo.moduels.auth.features.login.domain.utils
 
 import android.content.Context
-import android.util.Patterns
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthActionCodeException
 import com.google.firebase.auth.FirebaseAuthEmailException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.mking11.androidDemo.R
+import com.mking11.androidDemo.common.utils.isValidEmail
 import com.mking11.androidDemo.moduels.auth.features.login.domain.models.LoginState
-import com.mking11.androidDemo.moduels.auth.features.login.domain.utils.LoginErrorTypes
-
-fun isValidEmail(email: String): Boolean {
-    return try {
-        Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    } catch (e: Exception) {
-        false
-    }
-}
 
 
 fun loginInputValidation(

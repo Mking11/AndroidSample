@@ -10,8 +10,9 @@ import com.google.firebase.auth.FirebaseAuthEmailException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.mking11.androidDemo.R
+import com.mking11.androidDemo.common.utils.isValidEmail
 import com.mking11.androidDemo.moduels.auth.features.login.domain.models.LoginState
-import com.mking11.androidDemo.moduels.auth.features.login.domain.utils.LoginErrorTypes
+import com.mking11.androidDemo.moduels.auth.features.login.domain.utils.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

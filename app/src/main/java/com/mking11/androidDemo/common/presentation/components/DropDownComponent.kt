@@ -27,6 +27,7 @@ fun DropDownList(
     onError: Boolean,
     errorValue: String,
     selectedOption: String,
+    paddingValues: PaddingValues,
     list: List<String>,
     fontSize: Int = 16,
     onItemSelected: (String) -> Unit,
@@ -56,7 +57,7 @@ fun DropDownList(
     else
         Icons.Default.ArrowDropDown
 
-    Column(modifier = modifier) {
+    Column(modifier = modifier.fillMaxWidth()) {
         Text(
             label,
             fontSize = 14.sp,
@@ -74,7 +75,7 @@ fun DropDownList(
 
 
             ConstraintLayout(
-                modifier = Modifier
+                modifier = Modifier.fillMaxWidth()
                     .clickable {
                         expanded.value = !expanded.value
                     }
@@ -99,21 +100,21 @@ fun DropDownList(
                 DropdownMenu(
                     expanded = expanded.value,
                     onDismissRequest = { expanded.value = false },
-                    modifier = Modifier
-                        .fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(paddingValues)
                         .constrainAs(
                             dropdown
                         ) {
-                            start.linkTo(parent.start)
+                            start.linkTo(parent.start, 20.dp)
                             end.linkTo(parent.end)
-                            top.linkTo(parent.bottom)
+                            top.linkTo(parent.bottom, 20.dp)
                         }
                 ) {
                     list.forEach { label ->
                         DropdownMenuItem(onClick = {
                             onItemSelected(label)
                             expanded.value = false
-                        }) {
+                        }, modifier = Modifier.fillMaxWidth().padding(paddingValues)) {
                             Text(text = label, maxLines = 1)
                         }
                     }

@@ -14,4 +14,8 @@
     <string name="sigining_in">Signing in...</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="dont_have_an_account">Don\'t have an account ?, Sign up</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="country">Country</string>
+    <string name="sign_up">SignUp</string>
 </resources>

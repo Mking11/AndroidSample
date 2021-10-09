@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
 
 
                     val mapView = rememberMapViewWithLifecycle()
-                    Column(modifier = Modifier.width(200.dp).height(200.dp)){
+                    Column(){
                         if (hasPremissions) {
                             AndroidView({ mapView }) { mapView ->
                                 CoroutineScope(Dispatchers.Main).launch {
