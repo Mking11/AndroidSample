@@ -43,7 +43,7 @@ fun SignUpComponents() {
             modifier = Modifier
                 .padding(top = 10.dp, start = 30.dp, end = 30.dp)
                 .fillMaxWidth(),
-            paddingValues = PaddingValues(top = 2.dp,start = 30.dp,end = 30.dp)
+            paddingValues = PaddingValues(top = 2.dp, start = 30.dp, end = 30.dp)
         ) {
 
         }
@@ -54,7 +54,7 @@ fun SignUpComponents() {
             false,
             "",
             stringResource(R.string.phone_number),
-            type = KeyboardType.Email,
+            type = KeyboardType.Phone,
             modifier = Modifier
                 .padding(top = 10.dp, start = 30.dp, end = 30.dp)
                 .fillMaxWidth()
